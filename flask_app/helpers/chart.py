@@ -1,11 +1,11 @@
-# Run on CMD line: cd flask_app -> python chart.py
+# Run on CMD line: cd flask_app -> cd helpers -> python chart.py
 # visit http://127.0.0.1:8050/ in your web browser.
 
 from dash import Dash, html
 import pandas as pd
 
-df = pd.read_csv('https://gist.githubusercontent.com/chriddyp/c78bf172206ce24f77d6363a2d754b59/raw/c353e8ef842413cae56ae3920b8fd78468aa4cb2/usa-agricultural-exports-2011.csv')
-
+# Replace with our CSV info
+df = pd.read_csv('../data/chart_data.csv')
 
 def generate_table(dataframe, max_rows=10):
     return html.Table([
@@ -23,7 +23,7 @@ def generate_table(dataframe, max_rows=10):
 app = Dash(__name__)
 
 app.layout = html.Div([
-    html.H4(children='US Agriculture Exports (2011)'),
+    html.H2(children='Example Chart: US Agriculture Exports (2011)'),
     generate_table(df)
 ])
 
