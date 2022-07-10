@@ -6,7 +6,8 @@ from __init__ import start
 app, mysql = start()
 
 
-# Displays text form of data table, (PersonID, LastName, Grade1, Grade2, Grade3 CompositeGrade)
+# TODO: Use Python Dash to create interactive dashboards
+# Link table data to dash statistics
 @app.route("/", methods=['GET', 'POST'])
 def index():
     cursor = mysql.connect.cursor()
