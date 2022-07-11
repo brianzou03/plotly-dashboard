@@ -1,8 +1,6 @@
 # VirtualEnv creation
 ```
-pip install virtualenv
-virtualenv venv
-venv\Scripts\activate
+python3 -m venv ./venv
 ```
 
 # Run program on Windows

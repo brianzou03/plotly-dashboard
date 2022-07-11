@@ -8,6 +8,7 @@ import pandas as pd
 
 app = Dash(__name__)
 
+# Replace with our CSV file -> update CSV file with info
 df = pd.read_csv('../data/scatterplot_data.csv')
 
 fig = px.scatter(df, x="gdp per capita", y="life expectancy",
