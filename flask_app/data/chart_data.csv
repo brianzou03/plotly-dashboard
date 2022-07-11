@@ -1,7 +1,10 @@
-
-Index , Role, Name, Concentration, Time Logged
-1,Student,Zou,CS, 1087.68
-2,Student,Kabdou,English,567.89
-3,Teacher,To,Math,1000.50
-4,Administrator,Mao,Bio,7681.50
-5,Administrator,Chadha,STEM,15134.67
+1, 'Zou', 1.0, 'good', 95.0
+2, 'Kabdou', 1.0, 'great', 100.0
+3, 'To', 2.0, 'great', 95.0
+4, 'Mao', 2.0, 'excellent', 98.0
+5, 'Chadha', 3.0, 'excellent', 90.0
+6, 'Chen', 3.0, 'decent', 80.0
+7, 'Guo', 4.0, 'good', 64.0
+8, 'Porwal', 4.0, 'great', 65.0
+9, 'Lu', 5.0, 'decent', 96.0
+10, 'Wei', 5.0, 'good', 95.0
