@@ -3,7 +3,7 @@ def start():
     from flask_mysqldb import MySQL
     import yaml
 
-    app = Flask(__name__, template_folder='templates/', static_folder='static/')
+    app = Flask(__name__, template_folder='templates/', static_folder='static/', instance_relative_config=False)
 
     with open("flask_app/config.yaml", "r") as stream:
         config = yaml.safe_load(stream)

@@ -9,3 +9,5 @@ mysqlclient==2.1.1
 PyYAML==6.0
 secure-smtplib==0.1.1
 Werkzeug==2.1.2
+pandas==1.4.3
+dash==2.5.1

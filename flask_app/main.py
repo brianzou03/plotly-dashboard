@@ -1,48 +1,26 @@
 from flask import Flask, render_template, request, redirect
 from flask_mysqldb import MySQL
 from __init__ import start
-from dash import Dash, html
+from dash import *
 import pandas as pd
 
 # To run through commandline, use flask run
 app, mysql = start()
 
-# TODO: Use Python Dash to create interactive dashboards
-# 1. Link table data to dash statistics
-
 """
-@app.route("/", methods=['GET', 'POST'])
-def index():
-    cursor = mysql.connect.cursor()
-    cursor.execute("SELECT * FROM dash_table")
-    data = cursor.fetchall()
-    return render_template('index.html')
+def init_dashboard(server):
+    dash_app = dash.Dash(
+        server=server,
+        routes_pathname_prefix='/dashapp/',
+        external_stylesheets=[
+            '/static/style.css',
+        ]
+    )
+
+    dash_app.layout = html.Div(id='dash-container')
+
+    return dash_app.server
 """
-
-
-def display_table():
-    write_to_file()
-    df = pd.read_csv('flask_app/data/chart_data.csv')
-
-    app = Dash(__name__)
-
-    app.layout = html.Div([
-        html.H2(children='Class Engagement Chart'),
-        generate_table(df)
-    ])
-
-
-def generate_table(dataframe, max_rows=10):
-    return html.Table([
-        html.Thead(
-            html.Tr([html.Th(col) for col in dataframe.columns])
-        ),
-        html.Tbody([
-            html.Tr([
-                html.Td(dataframe.iloc[i][col]) for col in dataframe.columns
-            ]) for i in range(min(len(dataframe), max_rows))
-        ])
-    ])
 
 
 @app.route("/", methods=['GET', 'POST'])
@@ -51,13 +29,15 @@ def write_to_file():
     data_tuple = get_db_val()
     data_vals = []
 
-    f = open('flask_app/data/chart_data.csv', 'w')  # insert in chart format
+    f = open('../chart_data.csv', 'w')  # insert in chart format
+    f.write("Index , Role, Name, Concentration, Time Logged\n")
 
     for i in range(0, row_c):
         data_vals.append(data_tuple[i].values())  # adding to list of data values
         temp_str = str(data_vals[i])  # "dict_values([1, 'Zou', 1.0, 50.0, 100.0])"
         modified_str = temp_str[13:]
-        f.write(modified_str[0:-2] + "\n")
+        further_mod_str = modified_str.replace("'", "")  # removes '' from LastName
+        f.write(further_mod_str[0:-2] + "\n")
     f.close()
 
     return render_template('index.html')

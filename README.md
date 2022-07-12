@@ -30,6 +30,8 @@ ALTER USER 'root'@'localhost' IDENTIFIED BY 'password';
 INSERT INTO `dash_table` (`LastName`, `Stat1`, `Stat2`, `Stat3`) VALUES ("Zou", 1, 50, 100);
 INSERT INTO `dash_table` (`LastName`, `Stat1`, `Stat2`, `Stat3`) VALUES ("Kabdou", 5, 60, 100);
 INSERT INTO `dash_table` (`LastName`, `Stat1`, `Stat2`, `Stat3`) VALUES ("To", 7, 80, 95);
+INSERT INTO `dash_table` (`LastName`, `Stat1`, `Stat2`, `Stat3`) VALUES ("Mao", 9, 90, 80);
+INSERT INTO `dash_table` (`LastName`, `Stat1`, `Stat2`, `Stat3`) VALUES ("Chadha", 11, 70, 100);
 
 select * from dash_table;
 
