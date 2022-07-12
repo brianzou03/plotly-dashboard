@@ -1,8 +1,8 @@
 # VirtualEnv creation
 ```
-pip install virtualenv
-virtualenv venv
-venv\Scripts\activate
+python3 -m venv ./venv
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+.\venv\Scripts\activate
 ```
 
 # Run program on Windows
