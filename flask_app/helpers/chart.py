@@ -24,7 +24,7 @@ def generate_table(dataframe, max_rows=10):
 app = Dash(__name__)
 
 app.layout = html.Div([
-    html.H2(children='User Statistics Chart'),
+    html.H2(children='Attention Span to Grade Average'),
     generate_table(df)
 ])
 

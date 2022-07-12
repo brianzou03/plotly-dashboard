@@ -11,19 +11,20 @@ app = Dash(__name__)
 # Replace with our CSV file -> update CSV file with info
 df = pd.read_csv('../data/scatterplot_data.csv')
 
-fig = px.scatter(df, x="gdp per capita", y="life expectancy",
-                 size="population", color="continent", hover_name="country",
+# Edit frame with CSV column values
+fig = px.scatter(df, x="Grade Average", y="Time Logged",
+                 size="Grade Average", color="Section", hover_name="Name",
                  log_x=True, size_max=60)
 
 app.layout = html.Div([
-    html.H1(children='Example Scatterplot: Life Expectancy'),
+    html.H1(children='User Scatterplot: The effect of time logged on grade average'),
 
     html.Div(children='''
-    Example Text
+    Color denotes section, scatterplot adapts class range
     '''),
 
     dcc.Graph(
-        id='life-exp-vs-gdp',
+        id='time-log-vs-grade-avg',
         figure=fig
     )
 ])
