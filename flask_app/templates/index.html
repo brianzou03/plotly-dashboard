@@ -7,7 +7,18 @@
     <title>Table</title>
 </head>
 <body>
-<div>Placeholder for chart.html</div>
+<h1>User Chart: Attention Span to Grade Average</h1>
+<table>
+    {% for row in data: %}
+    <tr>
+        {% for elem in row: %}
+        <td>
+            {{ elem }}
+        </td>
+        {% endfor %}
+    </tr>
+    {% endfor %}
+</table>
 <button onclick="window.location.href='http://127.0.0.1:5000/scatterplot'">Button to Scatterplot</button>
 </body>
 </html>

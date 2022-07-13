@@ -5,11 +5,13 @@ from dash import Dash, html
 import pandas as pd
 
 
-df = pd.read_csv('../data/chart_data.csv')
+f = open('../chart_data.csv', 'r')
+
+df = pd.read_csv('../chart_data.csv')
 
 
 def generate_table(dataframe, max_rows=10):
-    return html.Table([
+    table = html.Table([
         html.Thead(
             html.Tr([html.Th(col) for col in dataframe.columns])
         ),
@@ -20,11 +22,13 @@ def generate_table(dataframe, max_rows=10):
         ])
     ])
 
+    return table
+
 
 app = Dash(__name__)
 
 app.layout = html.Div([
-    html.H2(children='Attention Span to Grade Average'),
+    html.H2(children='User Chart: Attention Span to Grade Average'),
     generate_table(df)
 ])
 

@@ -9,7 +9,7 @@ import pandas as pd
 app = Dash(__name__)
 
 # Replace with our CSV file -> update CSV file with info
-df = pd.read_csv('../data/scatterplot_data.csv')
+df = pd.read_csv('../scatterplot_data.csv')
 
 # Edit frame with CSV column values
 fig = px.scatter(df, x="Grade Average", y="Time Logged",
@@ -28,6 +28,26 @@ app.layout = html.Div([
         figure=fig
     )
 ])
+
+
+def generate_scatter():
+    scatterplot = app.layout = html.Div([
+        html.H1(children='User Scatterplot: The effect of time logged on grade average'),
+
+        html.Div(children='''
+        Color denotes section, scatterplot adapts class range
+        '''),
+
+        dcc.Graph(
+            id='time-log-vs-grade-avg',
+            figure=fig
+        )
+    ])
+    return scatterplot
+
+
+def return_fig():
+    return fig
 
 
 if __name__ == '__main__':
