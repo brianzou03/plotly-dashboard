@@ -7,22 +7,6 @@ import pandas as pd
 # To run through commandline, use flask run
 app, mysql = start()
 
-# TODO: Embed dash into flask server
-"""
-def init_dashboard(server):
-    dash_app = dash.Dash(
-        server=server,
-        routes_pathname_prefix='/dashapp/',
-        external_stylesheets=[
-            '/static/style.css',
-        ]
-    )
-
-    dash_app.layout = html.Div(id='dash-container')
-
-    return dash_app.server
-"""
-
 
 @app.route("/", methods=['GET', 'POST'])
 def write_to_chart():  # Writes to chart_data.csv, run chart.py
@@ -46,8 +30,8 @@ def write_to_chart():  # Writes to chart_data.csv, run chart.py
 
 @app.route("/scatterplot", methods=['GET', 'POST'])
 def write_to_scatterplot():  # Writes to scatterplot.py, run scatterplot.py
-    row_c = chart_row_count()
-    data_tuple = get_chart_db_val()
+    row_c = scatter_row_count()
+    data_tuple = get_scatter_db_val()
     data_vals = []
 
     f = open('flask_app/data/scatterplot_data.csv', 'w')  # insert in chart format
@@ -64,7 +48,6 @@ def write_to_scatterplot():  # Writes to scatterplot.py, run scatterplot.py
     return render_template('scatterplot.html')
 
 
-# TODO: Separate chart and scatterplot methods and tables
 def get_chart_db_val():
     cursor = mysql.connect.cursor()
     cursor.execute("SELECT * FROM chart_table")
@@ -73,9 +56,25 @@ def get_chart_db_val():
     return data_tuple
 
 
+def get_scatter_db_val():
+    cursor = mysql.connect.cursor()
+    cursor.execute("SELECT * FROM scatter_table")
+    data_tuple = cursor.fetchall()
+    print(data_tuple)
+    return data_tuple
+
+
 def chart_row_count():
     cursor = mysql.connect.cursor()
     cursor.execute("SELECT * FROM chart_table")
+    data_tuple = cursor.fetchall()
+    row_c = len(data_tuple)
+    return row_c
+
+
+def scatter_row_count():
+    cursor = mysql.connect.cursor()
+    cursor.execute("SELECT * FROM scatter_table")
     data_tuple = cursor.fetchall()
     row_c = len(data_tuple)
     return row_c
