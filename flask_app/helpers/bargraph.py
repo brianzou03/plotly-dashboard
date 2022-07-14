@@ -29,5 +29,27 @@ app.layout = html.Div(children=[
     )
 ])
 
+
+def generate_bargraph():
+    bargraph = app.layout = html.Div(children=[
+        html.H1(children='Example Bar Graph: Attention Retention'),
+
+        html.Div(children='''
+            Feature Attention Retention Bar Graph
+        '''),
+
+        dcc.Graph(
+            id='example-graph',
+            figure=fig
+        )
+    ])
+
+    return bargraph
+
+
+def return_fig():
+    return fig
+
+
 if __name__ == '__main__':
     app.run_server(debug=True)

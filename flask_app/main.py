@@ -1,42 +1,21 @@
-from flask import Flask, render_template, request, redirect
-from flask_mysqldb import MySQL
+from flask import render_template
 from __init__ import start
-import pandas as pd
-from helpers import chart, scatterplot
+from flask_app.helpers import scatterplot, bargraph
 import json
 import plotly
 import csv
 
-
 # To run through commandline, use flask run
 app, mysql = start()
 
-# TODO: Embed dash into flask server
-"""
-def init_dashboard(server):
-    dash_app = dash.Dash(
-        server=server,
-        routes_pathname_prefix='/dashapp/',
-        external_stylesheets=[
-            '/static/style.css',
-        ]
-    )
 
-    dash_app.layout = html.Div(id='dash-container')
-
-    return dash_app.server
-"""
-
-
-# Developer note: This is a randomized list of grades, don't take it personally :D
 @app.route("/", methods=['GET', 'POST'])
-def write_to_chart():  # Writes to chart_data.csv, run chart.py
+def display_chart():
     row_c = chart_row_count()
     data_tuple = get_chart_db_val()
     data_vals = []
 
     data = list(csv.reader(open("flask_app/data/chart_data.csv")))
-    print(data)
 
     f = open('flask_app/data/chart_data.csv', 'w')  # insert in chart format
     f.write("Index,Name,Section,Attention Span,Grade Average\n")
@@ -53,12 +32,12 @@ def write_to_chart():  # Writes to chart_data.csv, run chart.py
 
 
 @app.route("/scatterplot", methods=['GET', 'POST'])
-def write_to_scatterplot():  # Writes to scatterplot.py, run scatterplot.py
+def display_scatterplot():
     row_c = scatter_row_count()
     data_tuple = get_scatter_db_val()
     data_vals = []
-    fig = scatterplot.return_fig()
 
+    fig = scatterplot.return_fig()
     graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
 
     f = open('flask_app/data/scatterplot_data.csv', 'w')  # insert in chart format
@@ -73,6 +52,14 @@ def write_to_scatterplot():  # Writes to scatterplot.py, run scatterplot.py
     f.close()
 
     return render_template('scatterplot.html', graphJSON=graphJSON)
+
+
+@app.route("/bargraph", methods=['GET', 'POST'])
+def display_bargraph():  # bargraph data is located within bargraph.py, doesn't read from a file
+    fig = bargraph.return_fig()
+    graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
+
+    return render_template('bargraph.html', graphJSON=graphJSON)
 
 
 def get_chart_db_val():
