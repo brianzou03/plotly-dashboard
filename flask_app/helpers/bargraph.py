@@ -1,22 +1,19 @@
-# Run on CMD line: cd flask_app -> cd helpers -> python bargraph.py
-# visit http://127.0.0.1:8050/ in your web browser.
-
 from dash import Dash, html, dcc
 import plotly.express as px
 import pandas as pd
 
 app = Dash(__name__)
 
-
-df = pd.DataFrame({  # Plug stuff into this dataset
+df = pd.DataFrame({  # Dataframe contains the data for the bargraph
     "Feature": ["Quizzes", "Videos", "Assignments", "Quizzes", "Videos", "Assignments"],
     "Time Spent": [1, 4, 7, 2, 4, 8],
     "Gender": ["Male", "Male", "Male", "Female", "Female", "Female"]
 })
 
+# x and y are axis labels, color and barmode alter graph display
 fig = px.bar(df, x="Feature", y="Time Spent", color="Gender", barmode="group")
 
-app.layout = html.Div(children=[
+app.layout = html.Div(children=[  # Layout defines The HTML organization on a whole
     html.H1(children='Example Bar Graph: Attention Retention'),
 
     html.Div(children='''
@@ -30,24 +27,7 @@ app.layout = html.Div(children=[
 ])
 
 
-def generate_bargraph():
-    bargraph = app.layout = html.Div(children=[
-        html.H1(children='Example Bar Graph: Attention Retention'),
-
-        html.Div(children='''
-            Feature Attention Retention Bar Graph
-        '''),
-
-        dcc.Graph(
-            id='example-graph',
-            figure=fig
-        )
-    ])
-
-    return bargraph
-
-
-def return_fig():
+def return_fig():  # Returns figure for use in main.py > display_bargraph()
     return fig
 
 

@@ -1,16 +1,12 @@
-# Run on CMD line: cd flask_app -> cd helpers -> python chart.py
-# visit http://127.0.0.1:8050/ in your web browser.
-
 from dash import Dash, html
 import pandas as pd
 
+app = Dash(__name__)
 
-f = open('../chart_data.csv', 'r')
-
-df = pd.read_csv('../chart_data.csv')
+df = pd.read_csv('../chart_data.csv')  # Reading the csv file
 
 
-def generate_table(dataframe, max_rows=10):
+def generate_table(dataframe, max_rows=10):  # Generates table using the CSV dataframe
     table = html.Table([
         html.Thead(
             html.Tr([html.Th(col) for col in dataframe.columns])
@@ -25,9 +21,7 @@ def generate_table(dataframe, max_rows=10):
     return table
 
 
-app = Dash(__name__)
-
-app.layout = html.Div([
+app.layout = html.Div([  # Layout defines The HTML organization on a whole
     html.H2(children='User Chart: Attention Span to Grade Average'),
     generate_table(df)
 ])

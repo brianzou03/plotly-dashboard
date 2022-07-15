@@ -11,3 +11,4 @@ secure-smtplib==0.1.1
 Werkzeug==2.1.2
 pandas==1.4.3
 dash==2.5.1
+plotly==5.9.0
