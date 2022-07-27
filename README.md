@@ -1,4 +1,4 @@
-# AiTudier Dashboard
+# Dashboard
 
 The Dashboard application uses the Plotly Dash library to create interactive graphs. The project is built on the flask
 framework and takes data from the MySQL database, which hosts two separate tables. The data is written into the
